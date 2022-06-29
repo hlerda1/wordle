@@ -62,6 +62,19 @@ window.onload = function(){
     ];
 
     function inicio(){
-        
+        for (let iFila = 0; iFila < 6; iFila++) {
+            for (let iColumna = 0; iColumna < 5; iColumna++){
+                document.getElementById('block'+iFila+'_'+iColumna).oninput = function(event) {
+                // var x = document.getElementById('block'+iFila+'_'+iColumna).value;                
+                letras[iFila][iColumna] = event.target.value;
+                console.log(letras);
+                };                
+     
+            }
+        }
     }
+
+    inicio();
+
+    
 }
