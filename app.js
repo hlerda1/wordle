@@ -61,6 +61,8 @@ window.onload = function(){
         [' ',' ',' ',' ',' ']
     ];
 
+    var arrayFila = [' ',' ',' ',' ',' ']; 
+
     function inicio(){
         for (let iFila = 0; iFila < 6; iFila++) {
             for (let iColumna = 0; iColumna < 5; iColumna++){
@@ -74,7 +76,43 @@ window.onload = function(){
         }
     }
 
-    inicio();
+    /*Funcion para obtener la fila*/
+    function inicio2(){        
+        for (let iFila = 0; iFila < 6; iFila++) {
+            for (let iColumna = 0; iColumna < 5; iColumna++){
+                document.getElementById('block'+iFila+'_'+iColumna).onkeydown = function(event) {
+                    if (event.key === "Enter") {              
+                        cargarLetras();
+                        cargarFila(iFila)
+                        console.log(letras);
+                        console.log(arrayFila[0]+arrayFila[1]+arrayFila[2]+arrayFila[3]+arrayFila[4])
+                    }
+                };                
+     
+            }
+        }
+    }
+
+    function cargarLetras(){
+        for (let iFila = 0; iFila < 6; iFila++) {
+            for (let iColumna = 0; iColumna < 5; iColumna++){
+                letras[iFila][iColumna] = document.getElementById('block'+iFila+'_'+iColumna).value;
+            }
+        }
+    }
+
+    function cargarFila(fila){
+        let iFila = fila
+        // var array1 = [' ',' ',' ',' ',' '];    
+        for (let iColumna = 0; iColumna < 5; iColumna++){
+            arrayFila[iColumna] = document.getElementById('block'+iFila+'_'+iColumna).value;
+        }        
+        return arrayFila;
+    }
+
+
+
+    inicio2();
 
     
 }

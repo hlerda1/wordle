@@ -1,4 +1,10 @@
 input{
     width: 40px;
     height: 40px;
+    font-family: '8BIT WONDER', sans-serif;
+    font-size: larger;
+    text-align: center;
+}
+body{
+    font-family: '8BIT WONDER', sans-serif;
 }
