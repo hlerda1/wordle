@@ -15,12 +15,12 @@ window.onload = function(){
     //   }
 
     var colores = [
-        [1,2,3,0,0],
-        [0,3,0,3,0],
-        [0,0,2,0,0],
-        [0,2,0,0,0],
-        [0,0,0,1,2],
-        [2,1,3,0,0]
+        [0,0,0,0,0],
+        [0,0,0,0,0],
+        [0,0,0,0,0],
+        [0,0,0,0,0],
+        [0,0,0,0,0],
+        [0,0,0,0,0]
     ];
 
     function pintarTablero(){
@@ -50,7 +50,7 @@ window.onload = function(){
           } 
     }
 
-    pintarTablero();
+    
 
     var letras = [
         [' ',' ',' ',' ',' '],
@@ -60,6 +60,8 @@ window.onload = function(){
         [' ',' ',' ',' ',' '],
         [' ',' ',' ',' ',' ']
     ];
+
+    var arrayPalabra = ['a','b','a','c','o'];
 
     var arrayFila = [' ',' ',' ',' ',' ']; 
 
@@ -83,9 +85,11 @@ window.onload = function(){
                 document.getElementById('block'+iFila+'_'+iColumna).onkeydown = function(event) {
                     if (event.key === "Enter") {              
                         cargarLetras();
-                        cargarFila(iFila)
+                        cargarFila(iFila)                        
                         console.log(letras);
                         console.log(arrayFila[0]+arrayFila[1]+arrayFila[2]+arrayFila[3]+arrayFila[4])
+                        validarLetra(iFila);
+                        pintarTablero();
                     }
                 };                
      
@@ -110,7 +114,29 @@ window.onload = function(){
         return arrayFila;
     }
 
-
+    /*Verificación que las letras corresponden a la palabra y si estan desordenadas*/
+    function validarLetra(fila){
+        let iFila = fila;
+        let letraExiste = false;
+        for (let i = 0; i < 5; i++){
+            if(arrayFila[i] == arrayPalabra[i]){
+                colores[iFila][i] = 1;
+            }
+            else{
+                for(let e = 0; e < 5; e++){
+                    if(arrayFila[i] == arrayPalabra[e]){
+                        letraExiste = true;
+                    }
+                }
+                if(letraExiste == true){
+                    colores[iFila][i] = 2;
+                }
+                else{
+                    colores[iFila][i] = 3;
+                }
+            }
+        }
+    }
 
     inicio2();
 
