@@ -65,6 +65,42 @@ window.onload = function(){
 
     var arrayFila = [' ',' ',' ',' ',' ']; 
 
+    function saltar(){
+        for (let iFila = 0; iFila < 6; iFila++) {
+            for (let iColumna = 0; iColumna < 5; iColumna++){
+                document.getElementById('block'+iFila+'_'+iColumna).oninput = function(event) {
+                    // var target = event.srcElement || event.target;
+                    var target = event.target;
+                    var next = target;
+                    var myLength = target.value.length;
+                    if (myLength >= 1) {
+                        while (next = next.nextElementSibling) {
+                            if (next == null)
+                                break;
+                            if (next.tagName.toLowerCase() === "input") {
+                                next.focus();
+                                break;
+                            }
+                        }
+                    }
+                    // Move to previous field if empty (user pressed backspace)
+                    else if (myLength === 0) {
+                        var previous = target;
+                        while (previous = previous.previousElementSibling) {
+                            if (previous == null)
+                                break;
+                            if (previous.tagName.toLowerCase() === "input") {
+                                previous.focus();
+                                break;
+                            }
+                        }
+                    }
+                };                
+     
+            }
+        }
+    }
+
     function inicio(){
         for (let iFila = 0; iFila < 6; iFila++) {
             for (let iColumna = 0; iColumna < 5; iColumna++){
@@ -91,8 +127,7 @@ window.onload = function(){
                         validarLetra(iFila);
                         pintarTablero();
                     }
-                };                
-     
+                };         
             }
         }
     }
@@ -140,5 +175,5 @@ window.onload = function(){
 
     inicio2();
 
-    
+    saltar();
 }
