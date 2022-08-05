@@ -65,6 +65,25 @@ window.onload = function(){
 
     var arrayFila = [' ',' ',' ',' ',' ']; 
 
+    var focoFila = 0;
+
+    
+    /*Funcion que enfoca en la sigueinte fila y desabilita la anterior*/
+    function saltarFila(){
+        for(let i = 0; i < 6; i++){
+            if (focoFila != i){
+                document.getElementById('row'+i).disabled = true;
+            }
+            else{
+                document.getElementById('row'+i).disabled = false;
+                document.getElementById('block'+i+'_0').focus();
+            }
+        }
+
+    }
+
+    saltarFila();
+
     function saltar(){
         for (let iFila = 0; iFila < 6; iFila++) {
             for (let iColumna = 0; iColumna < 5; iColumna++){
@@ -126,6 +145,8 @@ window.onload = function(){
                         console.log(arrayFila[0]+arrayFila[1]+arrayFila[2]+arrayFila[3]+arrayFila[4])
                         validarLetra(iFila);
                         pintarTablero();
+                        focoFila++;
+                        saltarFila();
                     }
                 };         
             }
@@ -152,8 +173,10 @@ window.onload = function(){
     /*Verificación que las letras corresponden a la palabra y si estan desordenadas*/
     function validarLetra(fila){
         let iFila = fila;
-        let letraExiste = false;
+        
         for (let i = 0; i < 5; i++){
+            let letraExiste = false; 
+            var contador = 0;
             if(arrayFila[i] == arrayPalabra[i]){
                 colores[iFila][i] = 1;
             }
