@@ -1,17 +1,39 @@
+// let objetoJuego = {
+//     nombre: '',
+//     posicionGrilla: 0,
+//     palabrasUsadas: [],
+//     palabraExistente: '',
+//     resultadosPartidas: [],
+//     ultimaGrilla: [
+//         ['','','','',''],
+//         ['','','','',''],
+//         ['','','','',''],
+//         ['','','','',''],
+//         ['','','','',''],
+//         ['','','','','']
+//     ],  
+// };
+
 let objetoJuego = {
     nombre: '',
-    posicionGrilla: 0,
-    palabrasUsadas: [],
-    palabraExistente: '',
-    resultadosPartidas: [],
-    ultimaGrilla: [
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','','']
-    ],  
+    partidas:[{
+        fecha: '',
+        posicionGrilla: 0,
+        palabrasUsadas: [],
+        palabraExistente: '',
+        resultadosPartida: {
+            posicion: [],
+            tiempo: [],
+        },
+        ultimaGrilla: [
+            ['','','','',''],
+            ['','','','',''],
+            ['','','','',''],
+            ['','','','',''],
+            ['','','','',''],
+            ['','','','','']
+        ],  
+    }]
 };
 
 function clickNuevo(){
@@ -29,6 +51,7 @@ function clickNuevo(){
     let serializacionObjeto = JSON.stringify(objetoJuego);
     localStorage.setItem(objetoJuego.nombre, serializacionObjeto);
     localStorage.setItem('jugador', objetoJuego.nombre);
+    localStorage.setItem('partida', 0);
     window.location.href="juego.html";
     // console.log(localStorage);
 }
@@ -66,6 +89,8 @@ function clickJugar(){
         }
     }
     else{
+
+        obtenerPartidas();
         // Get the modal
         var modal = document.getElementById("indexModalExiste");
 
@@ -87,5 +112,31 @@ function clickJugar(){
             modal.style.display = "none";
             }
         }
+        
+    }
+}
+
+function obtenerPartidas(){
+    let nombreJugador = document.getElementById('textLogin').value
+    objetoJuego = JSON.parse(localStorage.getItem(nombreJugador))
+    console.log(objetoJuego.partidas[0].resultadosPartida.posicion.length)
+    
+    for (let i = 0; i < objetoJuego.partidas.length; i++) {
+        // arrayListUsers[i] = response.data[i];
+        /* --Loading table-- */
+        // GET TABLE
+        var table = document.getElementById("tablaPartidas");
+        // INSERT ROW
+        var row = table.insertRow();    
+        // INSERT CELLS
+        var cell = row.insertCell();
+        cell.innerHTML = i;
+        var cell = row.insertCell();
+        cell.innerHTML = objetoJuego.partidas[i].fecha;
+        var cell = row.insertCell();
+        cell.innerHTML = 'TBD';
+        var cell = row.insertCell();
+        cell.innerHTML = 'TBD';
+        /* --Loading table-- */
     }
 }

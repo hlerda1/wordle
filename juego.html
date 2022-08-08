@@ -5,59 +5,67 @@
         <meta http-equiv="X-UA-Copatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="styletecla.css">
         <link href="http://fonts.cdnfonts.com/css/8bit-wonder" rel="stylesheet">
         <style>@import url('http://fonts.cdnfonts.com/css/8bit-wonder');</style>
         <script src="appjuego.js"></script>
+        <script src="teclado.js"></script>
     </head>
     <body>
         <header>
             <h1>WORDLE</h1>
         </header>
         <main>
+            <div class="divReloj">
+                <label id="minutos">00</label>:<label id="segundos">00</label>
+            </div>
             <form>
                 <fieldset class="fieldRow" id="row0">
-                    <input id="block0_0" maxlength="1"></input>
-                    <input id="block0_1" maxlength="1"></input>
-                    <input id="block0_2" maxlength="1"></input>
-                    <input id="block0_3" maxlength="1"></input>
-                    <input id="block0_4" maxlength="1"></input>
+                    <input id="block0_0" class="bloqueLetra" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block0_1" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block0_2" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block0_3" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block0_4" class="bloqueLetra" maxlength="1"></input>
                 </fieldset>
                 <fieldset class="fieldRow" id="row1">
-                    <input id="block1_0" maxlength="1"></input>
-                    <input id="block1_1" maxlength="1"></input>
-                    <input id="block1_2" maxlength="1"></input>
-                    <input id="block1_3" maxlength="1"></input>
-                    <input id="block1_4" maxlength="1"></input>
+                    <input id="block1_0" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block1_1" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block1_2" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block1_3" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block1_4" class="bloqueLetra" maxlength="1"></input>
                 </fieldset>
                 <fieldset class="fieldRow" id="row2">
-                    <input id="block2_0" maxlength="1"></input>
-                    <input id="block2_1" maxlength="1"></input>
-                    <input id="block2_2" maxlength="1"></input>
-                    <input id="block2_3" maxlength="1"></input>
-                    <input id="block2_4" maxlength="1"></input>
+                    <input id="block2_0" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block2_1" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block2_2" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block2_3" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block2_4" class="bloqueLetra" maxlength="1"></input>
                 </fieldset>
                 <fieldset class="fieldRow" id="row3">
-                    <input id="block3_0" maxlength="1"></input>
-                    <input id="block3_1" maxlength="1"></input>
-                    <input id="block3_2" maxlength="1"></input>
-                    <input id="block3_3" maxlength="1"></input>
-                    <input id="block3_4" maxlength="1"></input>
+                    <input id="block3_0" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block3_1" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block3_2" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block3_3" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block3_4" class="bloqueLetra" maxlength="1"></input>
                 </fieldset>
                 <fieldset class="fieldRow" id="row4">
-                    <input id="block4_0" maxlength="1"></input>
-                    <input id="block4_1" maxlength="1"></input>
-                    <input id="block4_2" maxlength="1"></input>
-                    <input id="block4_3" maxlength="1"></input>
-                    <input id="block4_4" maxlength="1"></input>
+                    <input id="block4_0" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block4_1" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block4_2" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block4_3" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block4_4" class="bloqueLetra" maxlength="1"></input>
                 </fieldset>
                 <fieldset class="fieldRow" id="row5">
-                    <input id="block5_0" maxlength="1"></input>
-                    <input id="block5_1" maxlength="1"></input>
-                    <input id="block5_2" maxlength="1"></input>
-                    <input id="block5_3" maxlength="1"></input>
-                    <input id="block5_4" maxlength="1"></input>
+                    <input id="block5_0" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block5_1" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block5_2" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block5_3" class="bloqueLetra" maxlength="1"></input>
+                    <input id="block5_4" class="bloqueLetra" maxlength="1"></input>
                 </fieldset>
             </form>
+            <div>
+                <button type="button" onclick="clickTecla()">A</button>
+            </div>
             <!-- MODAL USARIO NO EXISTE -->
             <div id="indexModalGanador" class="modal">
                 <!-- Modal content -->

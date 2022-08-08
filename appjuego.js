@@ -1,7 +1,6 @@
-
-
 window.onload = function(){   
 
+    
     let focoVacio = 0;
     traerObjetoStorage();
     saltarFila();
@@ -64,7 +63,27 @@ window.onload = function(){
         }
     }
 
+    var minutesLabel = document.getElementById("minutos");
+    var secondsLabel = document.getElementById("segundos");
+    var totalSeconds = 0;
+    setInterval(setTime, 1000);
+
+    function setTime() {
+    ++totalSeconds;
+    secondsLabel.innerHTML = pad(totalSeconds % 60);
+    minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+    }
+
+    function pad(val) {
+    var valString = val + "";
+    if (valString.length < 2) {
+        return "0" + valString;
+    } else {
+        return valString;
+    }
 }
+}
+let partElegida = localStorage.getItem('partida');
 
 /*ARREGLO PARA IDENTIFICAR COLORES ASIGNADOS A LOS LETRAS INTRODUCIDAS*/
 var colores = [
@@ -100,38 +119,63 @@ var arrayFila = [' ',' ',' ',' ',' '];
 /*INDICA EN QUE FILA SE ENCUENTRA EL JUGADOR*/
 var focoFila = 0;
 
+// let objetoJuego = {
+//     nombre: '',
+//     posicionGrilla: 0,
+//     palabrasUsadas: [],
+//     palabraExistente: '',
+//     resultadosPartidas: [],
+//     ultimaGrilla: [
+//         ['','','','',''],
+//         ['','','','',''],
+//         ['','','','',''],
+//         ['','','','',''],
+//         ['','','','',''],
+//         ['','','','','']
+//     ],  
+// };
+
+
 let objetoJuego = {
     nombre: '',
-    posicionGrilla: 0,
-    palabrasUsadas: [],
-    palabraExistente: '',
-    resultadosPartidas: [],
-    ultimaGrilla: [
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','','']
-    ],  
+    partidas:{
+        fecha: '',
+        posicionGrilla: 0,
+        palabrasUsadas: [],
+        palabraExistente: '',
+        resultadosPartida: {
+            posicion: [],
+            tiempo: [],
+        },
+        ultimaGrilla: [
+            ['','','','',''],
+            ['','','','',''],
+            ['','','','',''],
+            ['','','','',''],
+            ['','','','',''],
+            ['','','','','']
+        ],  
+    }
 };
 
 function traerObjetoStorage(){
     let nombreJugador = localStorage.getItem('jugador');
+    
+    console.log(partElegida)
     objetoJuego = JSON.parse(localStorage.getItem(nombreJugador))
     // console.log(objetoJuego);
     for (let iFila = 0; iFila < 6; iFila++) {
         for (let iColumna = 0; iColumna < 5; iColumna++){
-            document.getElementById('block'+iFila+'_'+iColumna).value = objetoJuego.ultimaGrilla[iFila][iColumna]
+            document.getElementById('block'+iFila+'_'+iColumna).value = objetoJuego.partidas[partElegida].ultimaGrilla[iFila][iColumna]
         }            
     }
     cargarLetras();
     
-    if(objetoJuego.palabraExistente.length > 0){
-        focoFila = objetoJuego.posicionGrilla+1;
+    if(objetoJuego.partidas[partElegida].palabraExistente.length > 0){
+        focoFila = objetoJuego.partidas[partElegida].posicionGrilla+1;
     }
     else{
-        focoFila = objetoJuego.posicionGrilla
+        focoFila = objetoJuego.partidas[partElegida].posicionGrilla
     }
     
     saltarFila();
@@ -149,15 +193,15 @@ fetch('https://wordle.danielfrg.com/words/5.json')
         arrayListaPalabras[i] = response[i];
         // console.log(arrayListUsers[i])
     }
-    if(objetoJuego.palabraExistente == ''){
+    if(objetoJuego.partidas[partElegida].palabraExistente == ''){
         // if(objetoJuego.palabrasUsadas != null){
-        if(objetoJuego.palabrasUsadas.length > 0){   
+        if(objetoJuego.partidas[partElegida].palabrasUsadas.length > 0){   
             let condicion = 0
             do{
                 let random = Math.floor(Math.random() * response.length);
-                for (var i = 0; i < objetoJuego.palabrasUsadas.length; i++)
+                for (var i = 0; i < objetoJuego.partidas[partElegida].palabrasUsadas.length; i++)
                 {
-                    if(objetoJuego.palabrasUsadas[i] == arrayListaPalabras[random]){
+                    if(objetoJuego.partidas[partElegida].palabrasUsadas[i] == arrayListaPalabras[random]){
                         condicion = 0;
                     }
                     else{
@@ -174,7 +218,7 @@ fetch('https://wordle.danielfrg.com/words/5.json')
         }
     }
     else{
-        palabraGanadora = objetoJuego.palabraExistente;
+        palabraGanadora = objetoJuego.partidas[partElegida].palabraExistente;
     }
     cargarArrayPalabraGanadora();
     console.log(palabraGanadora);
@@ -233,17 +277,25 @@ function saltarFila(){
 
 }
 
+function obtenerFecha(){
+    var d = Date(Date.now());
+    let a = d.toString();
+    let b = a.slice(4,22);
+    return b
+}
+
 function cargarObjeto(fila){
     // objetoJuego.nombre = 'Horacio';
-    objetoJuego.posicionGrilla = fila;
+    objetoJuego.partidas[partElegida].posicionGrilla = fila;
+    objetoJuego.partidas[partElegida].fecha = obtenerFecha();
     if (fila <= 0){
-        objetoJuego.palabrasUsadas.push(palabraGanadora)
-        objetoJuego.palabraExistente = palabraGanadora
+        objetoJuego.partidas[partElegida].palabrasUsadas.push(palabraGanadora)
+        objetoJuego.partidas[partElegida].palabraExistente = palabraGanadora
         }
     // console.log(objetoJuego)
     for (let iFila = 0; iFila < 6; iFila++) {
         for (let iColumna = 0; iColumna < 5; iColumna++){
-            objetoJuego.ultimaGrilla[iFila][iColumna] = document.getElementById('block'+iFila+'_'+iColumna).value;
+            objetoJuego.partidas[partElegida].ultimaGrilla[iFila][iColumna] = document.getElementById('block'+iFila+'_'+iColumna).value;
         }
     }
     let serializacionObjeto = JSON.stringify(objetoJuego);
@@ -329,7 +381,10 @@ function compararPalabras(fila){
             modal.style.display = "none";
             }
         }
-        objetoJuego.resultadosPartidas.push(fila)
+        objetoJuego.partidas[partElegida].resultadosPartida.posicion.push(fila)
+        let valorMin = document.getElementById('minutos').textContent
+        let valorSeg = document.getElementById('segundos').textContent
+        objetoJuego.partidas[partElegida].resultadosPartida.tiempo.push(valorMin+":"+valorSeg)
         return true
     }
     else if(iFila >= 5){
@@ -352,7 +407,10 @@ function compararPalabras(fila){
             modal.style.display = "none";
             }
         }
-        objetoJuego.resultadosPartidas.push(6)
+        objetoJuego.partidas[partElegida].resultadosPartida.posicion.push(6)
+        let valorMin = document.getElementById('minutos').textContent
+        let valorSeg = document.getElementById('segundos').textContent
+        objetoJuego.partidas[partElegida].resultadosPartida.tiempo.push(valorMin+":"+valorSeg)
         return true
     }
 }
@@ -369,11 +427,11 @@ function clickVolver(){
 function limpiarTablero(){
     for (let iFila = 0; iFila < 6; iFila++) {
         for (let iColumna = 0; iColumna < 5; iColumna++){
-            objetoJuego.ultimaGrilla[iFila][iColumna] = '';
+            objetoJuego.partidas[partElegida].ultimaGrilla[iFila][iColumna] = '';
         }
     }
-    objetoJuego.palabraExistente = '';
-    objetoJuego.posicionGrilla = 0;
+    objetoJuego.partidas[partElegida].palabraExistente = '';
+    objetoJuego.partidas[partElegida].posicionGrilla = 0;
     
     let serializacionObjeto = JSON.stringify(objetoJuego);
     console.log(serializacionObjeto);
@@ -408,11 +466,40 @@ function validarLetra(fila){
     }
 }
 
+function validarLetra2(fila){
+    let iFila = fila;   
+    var arrayGanadora = ['','','','',''];  
+    var arrayFilaVieja = ['','','','',''];  
+    arrayGanadora = objetoJuego.partidas[partElegida].palabraExistente.split("");
+    arrayFilaVieja = objetoJuego.partidas[partElegida].ultimaGrilla[iFila];
+    for (let i = 0; i < 5; i++){
+        let letraExiste = false; 
+        // var contador = 0;
+        // arrayGanadora = palabraExistente.split("");
+        if(arrayFilaVieja[i] == arrayGanadora[i]){
+            colores[iFila][i] = 1;
+        }
+        else{
+            for(let e = 0; e < 5; e++){
+                if(arrayFilaVieja[i] == arrayGanadora[e]){
+                    letraExiste = true;
+                }
+            }
+            if(letraExiste == true){
+                colores[iFila][i] = 2;
+            }
+            else{
+                colores[iFila][i] = 3;
+            }
+        }
+    }
+}
+
 function validacionRecarga(){
-    if(objetoJuego.palabraExistente.length > 0){
+    if(objetoJuego.partidas[partElegida].palabraExistente.length > 0){
         
         for(let i = 0; i < focoFila; i++){
-                validarLetra(i);
+                validarLetra2(i);
             }
         pintarTablero();
     }
