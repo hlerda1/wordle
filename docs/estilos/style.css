@@ -5,6 +5,7 @@ input{
     font-size: 4em;
     text-align: center;
     color:black;
+    cursor: none;
 }
 body{
   background-color: black;
@@ -15,6 +16,25 @@ label{
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: white;
   font-size: 5em;
+}
+
+button{
+  font-size: 2em;
+}
+
+p{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+h2{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: xx-large;
+  color: white;
 }
 
 fieldset{
@@ -54,6 +74,10 @@ form{
   justify-content: top;
 }
 
+#trofeo{
+  padding-top: 6px;
+}
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -70,13 +94,16 @@ form{
   
   /* Modal Content/Box */
   .modal-content {
-    background-color: seagreen;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    background-color: darkslategray;
     margin: 10% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 4px solid black;
-    width: 30%; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
     font-family: Arial, Helvetica, sans-serif;
-    font-size: larger;
+    font-size: medium;
   }
   
   /* The Close Button */

@@ -1,6 +1,5 @@
 window.onload = function(){   
 
-    
     let focoVacio = 0;
     traerObjetoStorage();
     saltarFila();
@@ -30,8 +29,6 @@ window.onload = function(){
                     // Move to previous field if empty (user pressed backspace)
                     else if (myLength === 0) {
                         var previous = target;
-                        console.log(previous)
-                        console.log(previous.previousElementSibling)
                         while (previous = previous.previousElementSibling) {
                             if (previous == null)
                             {
@@ -54,7 +51,6 @@ window.onload = function(){
         var keyId = event.keyCode;
         if (keyId == 8)
         {
-            console.log('backspace')
             focoVacio = 1;
         }
         else
@@ -160,8 +156,7 @@ let objetoJuego = {
 
 function traerObjetoStorage(){
     let nombreJugador = localStorage.getItem('jugador');
-    
-    console.log(partElegida)
+
     objetoJuego = JSON.parse(localStorage.getItem(nombreJugador))
     if(partElegida > objetoJuego.partidas.length-1){
         const objNuevo = {
@@ -184,7 +179,7 @@ function traerObjetoStorage(){
         }
         objetoJuego.partidas.push(objNuevo)
     }
-    // console.log(objetoJuego);
+    
     for (let iFila = 0; iFila < 6; iFila++) {
         for (let iColumna = 0; iColumna < 5; iColumna++){
             document.getElementById('block'+iFila+'_'+iColumna).value = objetoJuego.partidas[partElegida].ultimaGrilla[iFila][iColumna]
@@ -212,7 +207,6 @@ fetch('https://wordle.danielfrg.com/words/5.json')
 .then(response => {
     for (let i = 0; i < response.length; i++) {
         arrayListaPalabras[i] = response[i];
-        // console.log(arrayListUsers[i])
     }
     if(objetoJuego.partidas[partElegida].palabraExistente == ''){
         // if(objetoJuego.palabrasUsadas != null){
@@ -256,8 +250,6 @@ function pintarTablero(){
     for (var iFila = 0; iFila < 6; iFila++) {
         for (var iColumna = 0; iColumna < 5; iColumna++){
             const input = document.getElementById('block'+iFila+'_'+iColumna)
-        //   const input = document.getElementById('block1_1')
-        //   console.log(iFila,iColumna)
             switch (colores[iFila][iColumna]) {
             case 0:
                     input.style.backgroundColor = 'white';
@@ -314,17 +306,14 @@ function cargarObjeto(fila){
         objetoJuego.partidas[partElegida].palabrasUsadas.push(palabraGanadora)
         objetoJuego.partidas[partElegida].palabraExistente = palabraGanadora
         }
-    // console.log(objetoJuego)
     for (let iFila = 0; iFila < 6; iFila++) {
         for (let iColumna = 0; iColumna < 5; iColumna++){
             objetoJuego.partidas[partElegida].ultimaGrilla[iFila][iColumna] = document.getElementById('block'+iFila+'_'+iColumna).value;
         }
     }
     let serializacionObjeto = JSON.stringify(objetoJuego);
-    // console.log(serializacionObjeto);
 
     localStorage.setItem(objetoJuego.nombre, serializacionObjeto)
-    // console.log(localStorage);
 }
 
 /*Funcion para obtener la fila*/
@@ -392,17 +381,17 @@ function compararPalabras(fila){
 
         modal.style.display = "block";
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
+        // // When the user clicks on <span> (x), close the modal
+        // span.onclick = function() {
+        //     modal.style.display = "none";
+        // }
         
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-            modal.style.display = "none";
-            }
-        }
+        // // When the user clicks anywhere outside of the modal, close it
+        // window.onclick = function(event) {
+        //     if (event.target == modal) {
+        //     modal.style.display = "none";
+        //     }
+        // }
         objetoJuego.partidas[partElegida].resultadosPartida.posicion.push(fila)
         let valorMin = document.getElementById('minutos').textContent
         let valorSeg = document.getElementById('segundos').textContent
@@ -418,17 +407,17 @@ function compararPalabras(fila){
 
         modal.style.display = "block";
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
+        // // When the user clicks on <span> (x), close the modal
+        // span.onclick = function() {
+        //     modal.style.display = "none";
+        // }
         
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-            modal.style.display = "none";
-            }
-        }
+        // // When the user clicks anywhere outside of the modal, close it
+        // window.onclick = function(event) {
+        //     if (event.target == modal) {
+        //     modal.style.display = "none";
+        //     }
+        // }
         objetoJuego.partidas[partElegida].resultadosPartida.posicion.push(6)
         let valorMin = document.getElementById('minutos').textContent
         let valorSeg = document.getElementById('segundos').textContent
@@ -456,11 +445,8 @@ function limpiarTablero(){
     objetoJuego.partidas[partElegida].posicionGrilla = 0;
     
     let serializacionObjeto = JSON.stringify(objetoJuego);
-    console.log(serializacionObjeto);
 
     localStorage.setItem(objetoJuego.nombre, serializacionObjeto)
-    console.log(localStorage);
-    // window.location.href="juego.html";
 }
 
 /*Verificación que las letras corresponden a la palabra y si estan desordenadas*/
@@ -526,3 +512,36 @@ function validacionRecarga(){
         pintarTablero();
     }
 }  
+
+
+function redirigirGithub(){
+    window.open('https://github.com/hlerda1/wordle', '_blank').focus();
+}
+
+function redirigirContacto(){
+    window.location.href="contacto.html"
+}
+
+function resultadoPartida(){
+    // Get the modal
+    var modal = document.getElementById("indexModalResultados");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("closeR")[0];
+
+    modal.style.display = "block";
+    // alert("Usuario y contraseña invalidos")
+    // localStorage.setItem('loginStatusKey', 0)
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    }
+}

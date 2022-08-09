@@ -139,3 +139,10 @@ function clickSeleccionar(i){
     window.location.href="juego.html";
 }
 
+function redirigirGithub(){
+    window.open('https://github.com/hlerda1/wordle', '_blank').focus();
+}
+
+function redirigirContacto(){
+    window.location.href="contacto.html"
+}

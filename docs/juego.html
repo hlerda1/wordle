@@ -17,7 +17,7 @@
                     <img src="./imagenes/github.png" alt="GitHub Repository" class="clickHeader" onclick="redirigirGithub()">
                 </div>
                 <div id="divHeader">
-                    <p id="yHeader"><strong>WORDLE</strong></p>
+                    <p id="yHeader"><a href="./index.html"><strong>WORDLE</a></strong></p>
                 </div>
                 <div>
                     <img src="./imagenes/mail2.png" alt="Contacto" class="clickHeader" onclick="redirigirContacto()">
@@ -27,10 +27,13 @@
         <main>
             <div>
                 <div class="subBody">
+                    <img src="./imagenes/trofeo.png" alt="Resultados" id="trofeo" class="clickHeader" onclick="resultadoPartida()">
+                </div>
+                <div class="subBody">
                     <label id="minutos">00</label><label>:</label><label id="segundos">00</label>
                 </div>
                 <div id="mainDiv" class="subBody">
-                    <form>
+                    <form autocomplete="off">
                         <div class="elemBlock">
                             <fieldset class="fieldRow" id="row0">
                                 <input id="block0_0" class="bloqueLetra" class="bloqueLetra" maxlength="1"></input>
@@ -91,11 +94,11 @@
             <!-- <div>
                 <button type="button" onclick="clickTecla()">A</button>
             </div> -->
-            <!-- MODAL USARIO NO EXISTE -->
+            <!-- MODAL GANAR -->
             <div id="indexModalGanador" class="modal">
                 <!-- Modal content -->
                 <div class="modal-content">
-                    <span class="closeG">&times;</span>
+                    <!-- <span class="closeG">&times;</span> -->
                     <h2>FELICITACIONES!!!</h2>
                     <p>has ganado esta partida</p>
                     <p>deseas continuar o volver a la pantalla principal</p>
@@ -103,13 +106,13 @@
                     <button type="button" id="btnVolver" class="logInput" onclick="clickVolver()">VOLVER</button>
                 </div>            
             </div>
-            <!-- MODAL USARIO NO EXISTE -->
+            <!-- MODAL GANAR -->
 
-            <!-- MODAL USARIO EXISTE -->
+            <!-- MODAL PERDER -->
             <div id="indexModalPerdedor" class="modal">
                 <!-- Modal content -->
                 <div class="modal-content">
-                    <span class="closeP">&times;</span>
+                    <!-- <span class="closeP">&times;</span> -->
                     <h2>LO LAMENTO :(</h2>
                     <p>has perdido esta partida</p>
                     <p>deseas continuar o volver a la pantalla principal</p>
@@ -117,7 +120,27 @@
                     <button type="button" id="btnVolver" class="logInput" onclick="clickVolver()">VOLVER</button>
                 </div>            
             </div>
-            <!-- MODAL USARIO EXISTE -->
+            <!-- MODAL PERDER -->
+
+            <!-- MODAL RESULTAODS -->
+            <div id="indexModalResultados" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="closeR">&times;</span>
+                    <h2>RESULTADOS DE LA PARTIDA</h2>
+                    <div id="tablaDiv1">
+                        <div>
+                            <table id="tablaResultados">
+                                <tr>
+                                    <th> - </th>
+                                    <th> - </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div> 
+                </div>            
+            </div>
+            <!-- MODAL RESULTAODS -->
         </main>
         <footer>
 
