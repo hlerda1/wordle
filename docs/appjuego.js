@@ -115,23 +115,6 @@ var arrayFila = [' ',' ',' ',' ',' '];
 /*INDICA EN QUE FILA SE ENCUENTRA EL JUGADOR*/
 var focoFila = 0;
 
-// let objetoJuego = {
-//     nombre: '',
-//     posicionGrilla: 0,
-//     palabrasUsadas: [],
-//     palabraExistente: '',
-//     resultadosPartidas: [],
-//     ultimaGrilla: [
-//         ['','','','',''],
-//         ['','','','',''],
-//         ['','','','',''],
-//         ['','','','',''],
-//         ['','','','',''],
-//         ['','','','','']
-//     ],  
-// };
-
-
 let objetoJuego = {
     nombre: '',
     partidas:{
@@ -209,7 +192,6 @@ fetch('https://wordle.danielfrg.com/words/5.json')
         arrayListaPalabras[i] = response[i];
     }
     if(objetoJuego.partidas[partElegida].palabraExistente == ''){
-        // if(objetoJuego.palabrasUsadas != null){
         if(objetoJuego.partidas[partElegida].palabrasUsadas.length > 0){   
             let condicion = 0
             do{
@@ -241,7 +223,7 @@ fetch('https://wordle.danielfrg.com/words/5.json')
 })
 .catch(function(error){
     console.log("Error", error);
-    // alert("ERROR" +'\n'+ error);
+    alert("ERROR" +'\n'+ error);
 })
 /* --OBTENER ARRAY DE PALABRAS ELEGIR PALABRA GANADORA-- */
 
@@ -298,7 +280,6 @@ function obtenerFecha(){
 }
 
 function cargarObjeto(fila){
-    // objetoJuego.nombre = 'Horacio';
     
     objetoJuego.partidas[partElegida].posicionGrilla = fila;
     objetoJuego.partidas[partElegida].fecha = obtenerFecha();
@@ -381,17 +362,6 @@ function compararPalabras(fila){
 
         modal.style.display = "block";
 
-        // // When the user clicks on <span> (x), close the modal
-        // span.onclick = function() {
-        //     modal.style.display = "none";
-        // }
-        
-        // // When the user clicks anywhere outside of the modal, close it
-        // window.onclick = function(event) {
-        //     if (event.target == modal) {
-        //     modal.style.display = "none";
-        //     }
-        // }
         objetoJuego.partidas[partElegida].resultadosPartida.posicion.push(fila)
         let valorMin = document.getElementById('minutos').textContent
         let valorSeg = document.getElementById('segundos').textContent
@@ -407,17 +377,6 @@ function compararPalabras(fila){
 
         modal.style.display = "block";
 
-        // // When the user clicks on <span> (x), close the modal
-        // span.onclick = function() {
-        //     modal.style.display = "none";
-        // }
-        
-        // // When the user clicks anywhere outside of the modal, close it
-        // window.onclick = function(event) {
-        //     if (event.target == modal) {
-        //     modal.style.display = "none";
-        //     }
-        // }
         objetoJuego.partidas[partElegida].resultadosPartida.posicion.push(6)
         let valorMin = document.getElementById('minutos').textContent
         let valorSeg = document.getElementById('segundos').textContent
@@ -451,7 +410,8 @@ function limpiarTablero(){
 
 /*Verificación que las letras corresponden a la palabra y si estan desordenadas*/
 function validarLetra(fila){
-    let iFila = fila;        
+    let iFila = fila;  
+          
     for (let i = 0; i < 5; i++){
         let letraExiste = false; 
         // var contador = 0;
@@ -465,7 +425,18 @@ function validarLetra(fila){
                 }
             }
             if(letraExiste == true){
-                colores[iFila][i] = 2;
+                let contador = 0;
+                for(let f = 0; f < i ; f++){
+                    if(arrayFila[i] == arrayFila[f]){
+                        contador++;
+                    }
+                }
+                if (contador > 0){
+                    colores[iFila][i] = 3;
+                }
+                else{
+                    colores[iFila][i] = 2;
+                }
             }
             else{
                 colores[iFila][i] = 3;
@@ -482,8 +453,6 @@ function validarLetra2(fila){
     arrayFilaVieja = objetoJuego.partidas[partElegida].ultimaGrilla[iFila];
     for (let i = 0; i < 5; i++){
         let letraExiste = false; 
-        // var contador = 0;
-        // arrayGanadora = palabraExistente.split("");
         if(arrayFilaVieja[i] == arrayGanadora[i]){
             colores[iFila][i] = 1;
         }
@@ -495,6 +464,20 @@ function validarLetra2(fila){
             }
             if(letraExiste == true){
                 colores[iFila][i] = 2;
+            }
+            if(letraExiste == true){
+                let contador = 0;
+                for(let f = 0; f < i ; f++){
+                    if(arrayFilaVieja[i] == arrayFilaVieja[f]){
+                        contador++;
+                    }
+                }
+                if (contador > 0){
+                    colores[iFila][i] = 3;
+                }
+                else{
+                    colores[iFila][i] = 2;
+                }
             }
             else{
                 colores[iFila][i] = 3;
@@ -513,7 +496,6 @@ function validacionRecarga(){
     }
 }  
 
-
 function redirigirGithub(){
     window.open('https://github.com/hlerda1/wordle', '_blank').focus();
 }
@@ -522,7 +504,8 @@ function redirigirContacto(){
     window.location.href="contacto.html"
 }
 
-function resultadoPartida(){
+function resultadoPartida(){    
+    obtenerResultados();
     // Get the modal
     var modal = document.getElementById("indexModalResultados");
 
@@ -530,18 +513,102 @@ function resultadoPartida(){
     var span = document.getElementsByClassName("closeR")[0];
 
     modal.style.display = "block";
-    // alert("Usuario y contraseña invalidos")
-    // localStorage.setItem('loginStatusKey', 0)
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function() {
+        removerRows();
         modal.style.display = "none";
     }
     
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
         if (event.target == modal) {
-        modal.style.display = "none";
+            removerRows();
+            modal.style.display = "none";
         }
+    }
+}
+
+function obtenerResultados(){
+    // let nombreJugador = document.getElementById('textLogin').value
+    // objetoJuego = JSON.parse(localStorage.getItem(nombreJugador))
+    
+    
+    // arrayListUsers[i] = response.data[i];
+    /* --Loading table-- */
+    // GET TABLE
+    var table = document.getElementById("tablaResultados");
+    // INSERT ROW
+    var row = table.insertRow();    
+    // INSERT CELLS
+    var cell = row.insertCell();
+    cell.innerHTML = 'Palabras Encontradas: ';
+    var cell = row.insertCell();
+    cell.innerHTML = palabrasEncontradas();
+
+     // INSERT ROW
+     var row = table.insertRow();    
+     // INSERT CELLS
+     var cell = row.insertCell();
+     cell.innerHTML = 'Palabras No Encontradas: ';
+     var cell = row.insertCell();
+     cell.innerHTML = palabrasFallidas();
+
+     for(let h = 0; h < 6; h++){
+        // INSERT ROW
+        var row = table.insertRow();    
+        // INSERT CELLS
+        var cell = row.insertCell();
+        cell.innerHTML = 'Fila '+h+': ';
+        var cell = row.insertCell();
+        cell.innerHTML = puntajePromedio(h);
+     }
+
+
+    /* --Loading table-- */
+    
+}
+
+function palabrasEncontradas(){
+    let resultado = 0;
+    for (let i = 0 ; i < objetoJuego.partidas[partElegida].resultadosPartida.posicion.length ; i++)
+    {
+        if (objetoJuego.partidas[partElegida].resultadosPartida.posicion[i] < 6)
+        {
+            resultado = resultado+1
+        }
+    }
+    return resultado
+}
+
+function palabrasFallidas(){
+    let resultado = 0;
+    for (let i = 0 ; i < objetoJuego.partidas[partElegida].resultadosPartida.posicion.length ; i++)
+    {
+        if (objetoJuego.partidas[partElegida].resultadosPartida.posicion[i] == 6)
+        {
+            resultado = resultado+1
+        }
+    }
+    return resultado
+}
+
+function puntajePromedio(e){
+    let resultado = '';
+    for (let i = 0 ; i < objetoJuego.partidas[partElegida].resultadosPartida.posicion.length ; i++)
+    {
+        if (objetoJuego.partidas[partElegida].resultadosPartida.posicion[i] == e)
+        {
+            resultado = resultado+'O'
+        }
+    }
+    return resultado
+}
+
+function removerRows(){
+    for(let i = 0; i < 8; i++)
+    {
+        var table = document.getElementById("tablaResultados");
+        table.deleteRow(0);
     }
 }

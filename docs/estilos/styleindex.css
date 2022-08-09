@@ -107,6 +107,14 @@ form{
   justify-content: top;
 }
 
+.hiddenError {
+  display: none;
+}
+
+.alertRed{
+  border: 2px solid red;
+}
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */

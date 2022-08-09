@@ -55,54 +55,60 @@ function clickNuevaPartida(){
 }
 
 function clickJugar(){
-    let keyJugador = document.getElementById('textLogin').value
-    if(localStorage.getItem(keyJugador) === null)
-    {
-        // Get the modal
-        var modal = document.getElementById("indexModalNoExiste");
+    validateBtnNombre();
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("closeNe")[0];
+    if(validateBtnNombre() == true){
+        let keyJugador = document.getElementById('textLogin').value
+        if(localStorage.getItem(keyJugador) === null)
+        {
+            // Get the modal
+            var modal = document.getElementById("indexModalNoExiste");
 
-        modal.style.display = "block";
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("closeNe")[0];
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-            modal.style.display = "none";
+            modal.style.display = "block";
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                modal.style.display = "none";
+                }
             }
         }
-    }
-    else{
+        else{
 
-        obtenerPartidas();
-        // Get the modal
-        var modal = document.getElementById("indexModalExiste");
+            obtenerPartidas();
+            // Get the modal
+            var modal = document.getElementById("indexModalExiste");
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("closeEx")[0];
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("closeEx")[0];
 
-        modal.style.display = "block";
-        // alert("Usuario y contraseña invalidos")
-        // localStorage.setItem('loginStatusKey', 0)
+            modal.style.display = "block";
+            // alert("Usuario y contraseña invalidos")
+            // localStorage.setItem('loginStatusKey', 0)
 
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-            modal.style.display = "none";
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+                removerRows();
+                modal.style.display = "none";
             }
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    removerRows();
+                    modal.style.display = "none";
+                }
+            }
+            
         }
-        
     }
 }
 
@@ -145,4 +151,25 @@ function redirigirGithub(){
 
 function redirigirContacto(){
     window.location.href="contacto.html"
+}
+
+function removerRows(){
+    for(let i = 0; i < objetoJuego.partidas.length; i++)
+    {
+        var table = document.getElementById("tablaPartidas");
+        table.deleteRow(1);
+    }
+}
+
+function validateBtnNombre() {
+    let x = document.getElementById("textLogin").value;
+    if (x == "") {
+        document.getElementById("textLogin").classList.add('alertRed');
+        return false;
+    } else if(x.length < 3){
+        document.getElementById("textLogin").classList.remove('hiddenError');
+        return false
+    } else {
+        return true;
+    }
 }
