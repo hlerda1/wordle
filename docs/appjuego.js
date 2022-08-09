@@ -163,6 +163,27 @@ function traerObjetoStorage(){
     
     console.log(partElegida)
     objetoJuego = JSON.parse(localStorage.getItem(nombreJugador))
+    if(partElegida > objetoJuego.partidas.length-1){
+        const objNuevo = {
+            fecha: '',
+            posicionGrilla: 0,
+            palabrasUsadas: [],
+            palabraExistente: '',
+            resultadosPartida: {
+                posicion: [],
+                tiempo: [],
+            },
+            ultimaGrilla: [
+                ['','','','',''],
+                ['','','','',''],
+                ['','','','',''],
+                ['','','','',''],
+                ['','','','',''],
+                ['','','','','']
+            ],  
+        }
+        objetoJuego.partidas.push(objNuevo)
+    }
     // console.log(objetoJuego);
     for (let iFila = 0; iFila < 6; iFila++) {
         for (let iColumna = 0; iColumna < 5; iColumna++){
@@ -286,6 +307,7 @@ function obtenerFecha(){
 
 function cargarObjeto(fila){
     // objetoJuego.nombre = 'Horacio';
+    
     objetoJuego.partidas[partElegida].posicionGrilla = fila;
     objetoJuego.partidas[partElegida].fecha = obtenerFecha();
     if (fila <= 0){

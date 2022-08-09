@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Copatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./estilos/Reset.css">
+        <link rel="stylesheet" href="./estilos/stylecont.css">
+        <script src="appcontacto.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="oneHeader">
+                <div>
+                    <img src="./imagenes/github.png" alt="GitHub Repository" class="clickHeader" onclick="redirigirGithub()">
+                </div>
+                <div id="divHeader">
+                    <p id="yHeader"><strong>WORDLE</strong></p>
+                </div>
+                <div>
+                    <img src="./imagenes/mail2.png" alt="Contacto" class="clickHeader" onclick="redirigirContacto()">
+                </div>
+            </div>            
+        </header>
+        <main>
+            <div>
+                <div class="subBody">
+                    <h2>Complete todos los campos</h2>
+                </div>
+                    <div id="mainDiv" class="subBody">
+                        <form id="formSub" name="myForm" action="">
+                            <section class="">
+                                <div class="elemBlock">
+                                    <div class="subBody ">
+                                        <input type="text" id="subNombre" name="fNombre" placeholder="Nombre" class="inputText">   
+                                    </div>
+                                    <div class="subBody">
+                                        <p id="nombreError" class="hiddenError formatoError">Minimo 3 letras</p>
+                                    </div>
+                                </div>                    
+                                <div class="elemBlock">
+                                    <div class="subBody ">
+                                        <input type="text" id="subEmail" name="fMail" placeholder="Email" class="inputText">
+                                    </div>
+                                    <div class="subBody">
+                                        <p id="emailError" class="hiddenError formatoError">No es un formato aceptable de mail</p>
+                                    </div>
+                                </div>
+                                <h3 class="subBody">Mensaje</h3>
+                                <div class="elemBlock2">
+                                    <div class="subBody">                                
+                                        <textarea id="subMens" cols="30" rows="10" class="inputCom"></textarea>
+                                    </div>
+                                    <div class="subBody">
+                                        <p id="mensError" class="hiddenError formatoError">El Mensaje debe tener mas de 5 caracteres</p>
+                                    </div>
+                                </div>
+                                <div class="elemBlock2">                
+                                    <div class="subBody">                            
+                                        <button type="button" onclick="clickEnviar()">Enviar</button>
+                                    </div>    
+                                </div> 
+                            </section>              
+                            <section>
+                                
+                        </section>                                      
+                    </form>
+                </div>
+            </div>
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Copatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./estilos/Reset.css">
+        <link rel="stylesheet" href="./estilos/stylebasic.css">
+        <link rel="stylesheet" href="./estilos/styleindex.css">
+        <script src="appindex.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="oneHeader">
+                <div>
+                    <img src="./imagenes/github.png" alt="GitHub Repository" class="clickHeader" onclick="redirigirGithub()">
+                </div>
+                <div id="divHeader">
+                    <p id="yHeader"><strong>WORDLE</strong></p>
+                </div>
+                <div>
+                    <img src="./imagenes/mail2.png" alt="Contacto" class="clickHeader" onclick="redirigirContacto()">
+                </div>
+            </div>            
+        </header>
+        <main>
+            <div>
+                <div class="subBody">
+                    <h2>BIENVENIDO!!!</h2>
+                </div>
+                <div class="subBody">
+                    <p>Ingrese su nombre de usuario para comenzar</p>
+                </div>
+                    <div id="mainDiv" class="subBody">
+                        <form>
+                            <div class="elemBlock">
+                                <div class="subBody ">
+                                    <input type="text" id="textLogin" name="textLog" placeholder="NOMBRE" required>  
+                                </div> 
+                            </div>
+                            <div class="elemBlock"> 
+                                <div class="subBody ">                        
+                                    <button type="button" id="btnEnviar" class="logInput" onclick="clickJugar()">JUGAR</button>
+                                </div>
+                            </div>   
+                        </form>
+                    </div>
+            </div>
+            <!-- MODAL USARIO NO EXISTE -->
+            <div id="indexModalNoExiste" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="closeNe">&times;</span>
+                    <h2>EL USUARIO NO EXISTE</h2>
+                    <button type="button" id="btnEnviar2" class="logInput" onclick="clickNuevo()">NUEVO USUARIO</button>
+                </div>            
+            </div>
+            <!-- MODAL USARIO NO EXISTE -->
+
+            <!-- MODAL USARIO EXISTE -->
+            <div id="indexModalExiste" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="closeEx">&times;</span>
+                    <h2>PARTIDAS DEL USUARIO</h2>
+                    <div id="tablaDiv1">
+                        <div>
+                            <table id="tablaPartidas">
+                                <tr>
+                                    <th> PARTIDA </th>
+                                    <th> FECHA </th>
+                                    <th> O </th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div> 
+                    <button type="button" id="btnEnviar2" class="logInput" onclick="clickNuevaPartida()">NUEVA PARTIDA</button>
+                </div>            
+            </div>
+            <!-- MODAL USARIO EXISTE -->
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>

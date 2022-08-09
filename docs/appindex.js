@@ -38,16 +38,6 @@ let objetoJuego = {
 
 function clickNuevo(){
     objetoJuego.nombre = document.getElementById('textLogin').value;
-    // objetoJuego.posicionGrilla = 0;
-    // if (fila <= 0){
-    //     objetoJuego.palabrasUsadas.push(palabraGanadora)
-    //     }
-    // console.log(objetoJuego)
-    // for (let iFila = 0; iFila < 6; iFila++) {
-    //     for (let iColumna = 0; iColumna < 5; iColumna++){
-    //         objetoJuego.ultimaGrilla[iFila][iColumna] = document.getElementById('block'+iFila+'_'+iColumna).value;
-    //     }
-    // }
     let serializacionObjeto = JSON.stringify(objetoJuego);
     localStorage.setItem(objetoJuego.nombre, serializacionObjeto);
     localStorage.setItem('jugador', objetoJuego.nombre);
@@ -56,9 +46,11 @@ function clickNuevo(){
     // console.log(localStorage);
 }
 
-function clickContinuar(){
+function clickNuevaPartida(){
     objetoJuego.nombre = document.getElementById('textLogin').value;
+    console.log(objetoJuego.partidas.length)
     localStorage.setItem('jugador', objetoJuego.nombre);
+    localStorage.setItem('partida', objetoJuego.partidas.length);
     window.location.href="juego.html";
 }
 
@@ -73,8 +65,6 @@ function clickJugar(){
         var span = document.getElementsByClassName("closeNe")[0];
 
         modal.style.display = "block";
-        // alert("Usuario y contraseña invalidos")
-        // localStorage.setItem('loginStatusKey', 0)
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
@@ -130,13 +120,22 @@ function obtenerPartidas(){
         var row = table.insertRow();    
         // INSERT CELLS
         var cell = row.insertCell();
-        cell.innerHTML = i;
+        let p = i+1;
+        cell.innerHTML = 'Partida '+p;
         var cell = row.insertCell();
         cell.innerHTML = objetoJuego.partidas[i].fecha;
         var cell = row.insertCell();
-        cell.innerHTML = 'TBD';
-        var cell = row.insertCell();
-        cell.innerHTML = 'TBD';
+        cell.innerHTML = '<input type="button" class="tablaSelect" onclick="clickSeleccionar('+i+')" value="Select"/>';
+        // var cell = row.insertCell();
+        // cell.innerHTML = 'TBD';
         /* --Loading table-- */
     }
 }
+
+function clickSeleccionar(i){
+    objetoJuego.nombre = document.getElementById('textLogin').value;
+    localStorage.setItem('jugador', objetoJuego.nombre);
+    localStorage.setItem('partida', i);
+    window.location.href="juego.html";
+}
+
